@@ -1,4 +1,4 @@
-const drawConnections = (landmarks) => {
+const drawConnections = (landmarks, ctx) => {
   const fingerPoints = {
     thumb: [0, 1, 2, 3, 4],
     indexFinger: [0, 5, 6, 7, 8],
@@ -10,7 +10,21 @@ const drawConnections = (landmarks) => {
   for(let i = 0; i < Object.keys(fingerPoints).length; i++) {
     let currentFinger = Object.keys(fingerPoints)[i];
     for(let j = 0; j < fingerPoints[currentFinger].length - 1; j++) {
-      
+      const firstIndex = fingerPoints[currentFinger][j];
+      const secondIndex = fingerPoints[currentFinger][j + 1];
+
+      ctx.beginPath();
+      ctx.moveTo(
+        landmarks[firstIndex][0],
+        landmarks[firstIndex][1],
+      );
+      ctx.lineTo(
+        landmarks[secondIndex][0],
+        landmarks[secondIndex][1],
+      );
+      ctx.strokeStyle = "pink";
+      ctx.lineWidth = 4;
+      ctx.stroke();
     }
   }
 }
@@ -28,6 +42,8 @@ export const drawHandMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       const landmarks = prediction.landmarks;
+      
+      drawConnections(landmarks, ctx);
 
       for (let i = 0; i < landmarks.length; i++) {
         let x = landmarks[i][0];
