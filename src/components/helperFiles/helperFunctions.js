@@ -7,50 +7,40 @@ const drawConnections = (landmarks, ctx) => {
     pinkyFinger: [0, 17, 18, 19, 20],
   };
 
-  for(let i = 0; i < Object.keys(fingerPoints).length; i++) {
+  for (let i = 0; i < Object.keys(fingerPoints).length; i++) {
     let currentFinger = Object.keys(fingerPoints)[i];
-    for(let j = 0; j < fingerPoints[currentFinger].length - 1; j++) {
+    for (let j = 0; j < fingerPoints[currentFinger].length - 1; j++) {
       const firstIndex = fingerPoints[currentFinger][j];
       const secondIndex = fingerPoints[currentFinger][j + 1];
 
       ctx.beginPath();
-      ctx.moveTo(
-        landmarks[firstIndex][0],
-        landmarks[firstIndex][1],
-      );
-      ctx.lineTo(
-        landmarks[secondIndex][0],
-        landmarks[secondIndex][1],
-      );
+      ctx.moveTo(landmarks[firstIndex][0], landmarks[firstIndex][1]);
+      ctx.lineTo(landmarks[secondIndex][0], landmarks[secondIndex][1]);
       ctx.strokeStyle = "pink";
       ctx.lineWidth = 4;
       ctx.stroke();
     }
   }
-}
+};
 
-const drawCircle = (ctx, x, y, radius, startAngle, endAngle) => {
-  ctx.beginPath();
-  ctx.arc(x, y, radius, startAngle, endAngle * Math.PI);
-  ctx.fillStyle = "red";
-  ctx.fill();
+const drawCircle = (ctx, landmarks, radius, startAngle, endAngle) => {
+  for (let i = 0; i < landmarks.length; i++) {
+    let x = landmarks[i][0];
+    let y = landmarks[i][1];
+    ctx.beginPath();
+    ctx.arc(x, y, radius, startAngle, endAngle * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+  }
 };
 
 export const drawHandMesh = (predictions, ctx) => {
-  console.log(predictions);
-
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       const landmarks = prediction.landmarks;
-      
+
       drawConnections(landmarks, ctx);
-
-      for (let i = 0; i < landmarks.length; i++) {
-        let x = landmarks[i][0];
-        let y = landmarks[i][1];
-
-        drawCircle(ctx, x, y, 7, 0, 3);
-      }
+      drawCircle(ctx, landmarks, 7, 0, 3);
     });
   }
 };
