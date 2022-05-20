@@ -5,7 +5,7 @@ const Footer = () => {
   return(
     <Box sx={{width: "100%", height: "5rem"}}>
       <Typography>
-        Place Holder
+        
       </Typography>
     </Box>
   )

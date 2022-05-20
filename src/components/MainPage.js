@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import AppInfo from "./AppInfo";
 import Camera from "./Camera";
@@ -20,8 +20,8 @@ const MainPage = () => {
         >
           <Box
             sx={{
-              width: 640,
-              height: 480,
+              width: "40rem",
+              height: "30rem",
               backgroundColor: "gray",
             }}
           />
@@ -42,13 +42,20 @@ const MainPage = () => {
           >
             Welcome to{" "}
             <Box component="span" color={"#62b7fc"}>
-              Hand-Sign.
+              AI-Sign.
             </Box>
           </Typography>
           <AppInfo />
           <Typography variant="h3" fontWeight={400} fontFamily="Montserrat">
             {curGesture}
           </Typography>
+          <Box
+            sx={{
+              width: "18.75rem",
+              height: "18.75rem",
+              backgroundColor: "gray",
+            }}
+          />
         </Box>
       </Box>
       <Footer />

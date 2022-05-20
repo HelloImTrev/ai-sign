@@ -24,6 +24,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
     "@tensorflow-models/handpose": "^0.0.7",
     "@tensorflow/tfjs": "^3.17.0",

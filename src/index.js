@@ -6,16 +6,7 @@ import { theme } from "../public/siteTheme";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <Paper
-      elevation={2}
-      sx={{
-        backgroundColor: "white",
-        marginRight: "1%",
-        marginLeft: "1%",
-      }}
-    >
-      <App />
-    </Paper>
+    <App />
   </ThemeProvider>,
   document.querySelector("#root")
 );
