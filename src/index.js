@@ -10,7 +10,6 @@ ReactDOM.render(
       elevation={2}
       sx={{
         backgroundColor: "white",
-        height: "90vh",
         marginRight: "1%",
         marginLeft: "1%",
       }}

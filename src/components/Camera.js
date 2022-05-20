@@ -5,8 +5,9 @@ import * as fp from "fingerpose";
 import Webcam from "react-webcam";
 import { drawHandMesh } from "./helperFiles/helperFunctions";
 import { Box } from "@mui/material";
+import { Alphabet } from "../gestures/alphabet";
 
-const Camera = ({setCurGesture}) => {
+const Camera = ({ setCurGesture }) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -43,17 +44,40 @@ const Camera = ({setCurGesture}) => {
 
       if (hand.length > 0) {
         const GE = new fp.GestureEstimator([
-          fp.Gestures.VictoryGesture,
-          fp.Gestures.ThumbsUpGesture,
+          Alphabet.aslLetterA,
+          Alphabet.aslLetterB,
+          Alphabet.aslLetterC,
+          Alphabet.aslLetterD,
+          Alphabet.aslLetterE,
+          Alphabet.aslLetterF,
+          Alphabet.aslLetterG,
+          Alphabet.aslLetterH,
+          Alphabet.aslLetterI,
+          Alphabet.aslLetterJ,
+          Alphabet.aslLetterK,
+          Alphabet.aslLetterL,
+          Alphabet.aslLetterM,
+          Alphabet.aslLetterN,
+          Alphabet.aslLetterO,
+          Alphabet.aslLetterP,
+          Alphabet.aslLetterQ,
+          Alphabet.aslLetterR,
+          Alphabet.aslLetterS,
+          Alphabet.aslLetterT,
+          Alphabet.aslLetterU,
+          Alphabet.aslLetterV,
+          Alphabet.aslLetterW,
+          Alphabet.aslLetterX,
+          Alphabet.aslLetterY,
+          Alphabet.aslLetterZ,
         ]);
 
-        const estimateGesture = await GE.estimate(hand[0].landmarks, 8);
+        const estimateGesture = await GE.estimate(hand[0].landmarks, 6.5);
 
-        if(estimateGesture.gestures[0].name) {
+        if (estimateGesture.gestures[0].name) {
           console.log(estimateGesture.gestures[0].name);
           setCurGesture(estimateGesture.gestures[0].name);
         }
-       
       }
 
       //drawHandMesh(hand, ctx);
