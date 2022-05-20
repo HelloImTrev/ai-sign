@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import AppInfo from "./AppInfo";
 import Camera from "./Camera";
-import Footer from "./Footer";
+
 
 const MainPage = () => {
   const [curGesture, setCurGesture] = useState("None.");
@@ -17,19 +17,21 @@ const MainPage = () => {
           alignItems="center"
           justifyContent="center"
           marginTop="5rem"
+          marginBottom="5rem"
         >
-          <Box
+          {/* <Box
             sx={{
               width: "40rem",
               height: "30rem",
               backgroundColor: "gray",
             }}
-          />
-          {/* <Camera setCurGesture={setCurGesture}/> */}
+          /> */}
+          <Camera setCurGesture={setCurGesture}/>
         </Box>
-        <Box
+        <Box  
           display={"flex"}
           flexGrow={1}
+          borderRadius="4px"
           flexDirection="column"
           alignItems="center"
           justifyContent="start"
@@ -58,7 +60,6 @@ const MainPage = () => {
           />
         </Box>
       </Box>
-      <Footer />
     </Box>
   );
 };

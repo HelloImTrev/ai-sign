@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import * as fp from "fingerpose";
@@ -10,6 +10,7 @@ import { Alphabet } from "../gestures/alphabet";
 const Camera = ({ setCurGesture }) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  useEffect(() => {startHandPose()}, []);
 
   const videoConstraints = {
     width: 640,
@@ -29,6 +30,7 @@ const Camera = ({ setCurGesture }) => {
   const detectHands = async (neuralNet) => {
     if (
       typeof webcamRef.current !== "undefined" &&
+      webcamRef.current !== null &&
       webcamRef.current.video.readyState === 4
     ) {
       const video = webcamRef.current.video;
@@ -74,43 +76,39 @@ const Camera = ({ setCurGesture }) => {
 
         const estimateGesture = await GE.estimate(hand[0].landmarks, 6.5);
 
-        if (estimateGesture.gestures[0].name) {
-          console.log(estimateGesture.gestures[0].name);
+        if (estimateGesture.gestures !== undefined && estimateGesture.gestures.length > 0) {
           setCurGesture(estimateGesture.gestures[0].name);
         }
       }
 
-      //drawHandMesh(hand, ctx);
+      drawHandMesh(hand, ctx);
     }
   };
 
-  startHandPose();
+  
 
   return (
     <div>
       <Box>
+      <canvas
+          ref={canvasRef}
+          style={{
+            position: "absolute",
+            margin: "auto",
+            width: 640,
+            height: 480,
+            zIndex: 1
+          }}
+        />
         <Webcam
           ref={webcamRef}
           style={{
+            position:"absolute",
             margin: "auto",
             width: 640,
             height: 480,
           }}
           videoConstraints={videoConstraints}
-        />
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            textAlign: "center",
-            margin: "auto",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: 640,
-            height: 480,
-          }}
         />
       </Box>
     </div>
