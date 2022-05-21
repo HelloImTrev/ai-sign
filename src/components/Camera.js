@@ -128,17 +128,19 @@ const Camera = ({ setCurGesture, setGestureImage }) => {
             ? canvasRef.current.removeAttribute("hidden")
             : canvasRef.current.setAttribute("hidden", "hidden")
           : console.log("loading canvas...")}
-
+        
         <Webcam
           ref={webcamRef}
           style={{
-            margin: "auto",
+            marginTop: "1rem",
+            marginLeft: "auto",
+            marginRight: "auto",
             width: 640,
             height: 480,
           }}
           videoConstraints={videoConstraints}
         />
-        <FormGroup>
+        <FormGroup sx={{width: 640, marginLeft: "auto", marginRight: "auto"}}>
           <FormControlLabel control={<Switch checked={checked} onChange={handleChange} />} label="Show mesh visualization" />
         </FormGroup>
       </Box>

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+} from "@mui/material";
 import AppInfo from "./AppInfo";
 import Camera from "./Camera";
 
@@ -8,76 +14,69 @@ const MainPage = () => {
   const [gestureImage, setGestureImage] = useState(null);
 
   return (
-    <Box display={"flex"} justifyContent="center">
-      <Box
-        display={"flex"}
-        justifyContent="center"
-        marginTop="3rem"
-        marginBottom="auto"
-      >
-        <Paper
-          sx={{
-            width: "45rem",
-          }}
-          display={"flex"}
-          flexGrow={1}
-          flexDirection="column"
-          justifyContent="center"
-        >
-          <Box margin="3rem auto">
+    <Grid container spacing={8} sx={{ padding: "3rem" }}>
+      <Grid item xs={7}>
+        <Card>
+          <CardContent>
             <Camera
               setCurGesture={setCurGesture}
               setGestureImage={setGestureImage}
             />
-          </Box>
-        </Paper>
-
-        <Box
-          display={"flex"}
-          flexGrow={1}
-          borderRadius="4px"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Paper elevation={2}>
-            <Typography
-              fontSize="2.5rem"
-              fontWeight={800}
-              fontFamily="Montserrat"
-              marginTop="2rem"
-            >
-              Welcome to{" "}
-              <Box component="span" color={"#62b7fc"}>
-                AI-Sign.
-              </Box>
-            </Typography>
-            <AppInfo />
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={5}>
+        <Card sx={{height: "578px"}}>
+          <CardContent>
             <Box
               display={"flex"}
-              justifyContent="center"
-              sx={{
-                width: "18.75rem",
-                height: "18.75rem",
-              }}
+              flexGrow={1}
+              borderRadius="4px"
+              flexDirection="column"
+              alignItems="center"
             >
-              <img
-                src={`/ASL-Images/aslLetterC.svg`}
-                style={{ width: "18.75rem", height: "18.75rem" }}
-              />
-              {/* {gestureImage ? (
-                <img
-                  src={`/ASL-Images/aslLetterC.svg`}
-                  style={{ width: "18.75rem", height: "18.75rem" }}
-                />
-              ) : null} */}
+              <Typography
+                fontSize="2.5rem"
+                fontWeight={800}
+                fontFamily="Montserrat"
+              >
+                Welcome to{" "}
+                <Box component="span" color={"#62b7fc"}>
+                  AI-Sign.
+                </Box>
+              </Typography>
+              <Box marginTop=".5rem">
+                <AppInfo />
+              </Box>
+              <Box
+                display={"flex"}
+                justifyContent="center"
+                sx={{
+                  marginTop: "2rem",
+                  width: "18.75rem",
+                  height: "18.75rem",
+                }}
+              >
+                {gestureImage ? (
+                  <img
+                    src={`/ASL-Images/${gestureImage}.svg`}
+                    style={{ width: "18.75rem", height: "18.75rem" }}
+                  />
+                ) : null}
+              </Box>
+              <Typography
+                variant="h3"
+                fontWeight={400}
+                fontFamily="Montserrat"
+                marginTop="1rem"
+              >
+                Letter: {curGesture}
+              </Typography>
             </Box>
-            <Typography variant="h3" fontWeight={400} fontFamily="Montserrat">
-              Letter: {curGesture}
-            </Typography>
-          </Paper>
-        </Box>
-      </Box>
-    </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 

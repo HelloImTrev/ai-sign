@@ -29,7 +29,7 @@ const drawCircle = (ctx, landmarks, radius, startAngle, endAngle) => {
     let y = landmarks[i][1];
     ctx.beginPath();
     ctx.arc(x, y, radius, startAngle, endAngle * Math.PI);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#f34d7b";
     ctx.fill();
   }
 };

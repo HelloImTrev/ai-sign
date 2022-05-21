@@ -26,12 +26,12 @@ const AppInfo = () => {
               </Typography>
               <br />
               <Typography>
-                This application was built for a stackthon done Fullstack
-                Academy, the idea for this application stemed from both my
-                interest in other technologies (such as th AI used here), and
+                This application was built for a stackthon done at Fullstack
+                Academy, the idea for this application stemmed from both my
+                interest in other technologies (such as the AI used here), and
                 the human nature need for instant feedback. This application is
                 powered by Tensorflow, which constanly is scanning your camera
-                feed look for hands. Once hands have been detected it then
+                feed looking for hands. Once hands have been detected it then
                 creates anchor points know as "landmarks" on what it guesses are
                 knuckles. How cool is that!?
               </Typography>
@@ -55,11 +55,12 @@ const AppInfo = () => {
       <Button
         variant="contained"
         color="primary"
+        sx={{marginRight: "1rem"}}
         onClick={() => setDrawerState(true)}
       >
         About
       </Button>
-      <Button variant="outlined" color="secondary">
+      <Button variant="outlined" color="secondary" sx={{marginLeft: "1rem"}}>
         Supported Gestures
       </Button>
     </Box>

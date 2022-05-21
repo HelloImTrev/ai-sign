@@ -6,23 +6,13 @@ import MainPage from "./components/MainPage";
 const App = () => {
   return (
     <div style={{ textAlign: "center" }}>
-      {/* <Paper
-        elevation={2}
-        sx={{
-          backgroundColor: "white",
-          marginRight: "1%",
-          marginLeft: "1%",
-        }}
-      > */}
-        <MainPage />
-      
+      <MainPage />
       <Box
         color="GrayText"
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: ".5rem",
         }}
       >
         <Typography fontSize={12} marginRight=".2rem">
