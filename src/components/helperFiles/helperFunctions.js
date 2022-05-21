@@ -35,7 +35,6 @@ const drawCircle = (ctx, landmarks, radius, startAngle, endAngle) => {
 };
 
 export const drawHandMesh = (predictions, ctx) => {
-  console.log("DRAWING HAND!!!!!");
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       const landmarks = prediction.landmarks;

@@ -1,16 +1,25 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import * as fp from "fingerpose";
 import Webcam from "react-webcam";
 import { drawHandMesh } from "./helperFiles/helperFunctions";
-import { Box } from "@mui/material";
+import { Box, FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { Alphabet } from "../gestures/alphabet";
 
-const Camera = ({ setCurGesture }) => {
+
+const Camera = ({ setCurGesture, setGestureImage }) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  useEffect(() => {startHandPose()}, []);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    startHandPose();
+  }, []);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const videoConstraints = {
     width: 640,
@@ -76,8 +85,22 @@ const Camera = ({ setCurGesture }) => {
 
         const estimateGesture = await GE.estimate(hand[0].landmarks, 6.5);
 
-        if (estimateGesture.gestures !== undefined && estimateGesture.gestures.length > 0) {
-          setCurGesture(estimateGesture.gestures[0].name);
+        if (
+          estimateGesture.gestures !== undefined &&
+          estimateGesture.gestures.length > 0
+        ) {
+          const confidence = estimateGesture.gestures.map(pred => pred.score);
+          const maxConfidence = confidence.indexOf(
+            Math.max.apply(null, confidence)
+          );
+
+          if(estimateGesture.gestures[maxConfidence].name){
+            const name = estimateGesture.gestures[maxConfidence].name;
+
+            setCurGesture(name);
+            setGestureImage(`aslLetter${name}`);
+
+          }
         }
       }
 
@@ -85,31 +108,39 @@ const Camera = ({ setCurGesture }) => {
     }
   };
 
-  
-
   return (
     <div>
       <Box>
-      <canvas
+        <canvas
           ref={canvasRef}
+          hidden
           style={{
             position: "absolute",
             margin: "auto",
             width: 640,
             height: 480,
-            zIndex: 1
+            zIndex: 1,
           }}
         />
+
+        {canvasRef.current
+          ? checked
+            ? canvasRef.current.removeAttribute("hidden")
+            : canvasRef.current.setAttribute("hidden", "hidden")
+          : console.log("loading canvas...")}
+
         <Webcam
           ref={webcamRef}
           style={{
-            position:"absolute",
             margin: "auto",
             width: 640,
             height: 480,
           }}
           videoConstraints={videoConstraints}
         />
+        <FormGroup>
+          <FormControlLabel control={<Switch checked={checked} onChange={handleChange} />} label="Show mesh visualization" />
+        </FormGroup>
       </Box>
     </div>
   );
