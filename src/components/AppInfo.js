@@ -1,67 +1,43 @@
 import { Box, Button, Divider, Drawer, Typography } from "@mui/material";
 import React, { useState } from "react";
+import About from "./About";
+import GestureList from "./GestureList";
 
 const AppInfo = () => {
-  const [drawerState, setDrawerState] = useState(false);
+  const [aboutDrawerState, setAboutDrawerState] = useState(false);
+  const [gestureDrawerState, setGestureDrawerState] = useState(false);
 
   return (
     <Box>
       <Drawer
         anchor="top"
-        open={drawerState}
-        onClose={() => setDrawerState(false)}
+        open={aboutDrawerState}
+        onClose={() => setAboutDrawerState(false)}
       >
-        <Box sx={{ margin: "1rem" }}>
-          <Box>
-            <Typography variant="h4" fontWeight={500} fontFamily="Montserrat">
-              <strong>What is AI-Sign?</strong>
-            </Typography>
-            <Divider sx={{ width: "18.7rem"}}  />
-          </Box>
-          <Box sx={{ marginTop: ".5rem" }}>
-            <Typography>
-              <Typography>
-                AI-Sign is a fun and interactive way for you to practice your
-                American Sign Language!
-              </Typography>
-              <br />
-              <Typography>
-                This application was built for a stackthon done at Fullstack
-                Academy, the idea for this application stemmed from both my
-                interest in other technologies (such as the AI used here), and
-                the human nature need for instant feedback. This application is
-                powered by Tensorflow, which constanly is scanning your camera
-                feed looking for hands. Once hands have been detected it then
-                creates anchor points know as "landmarks" on what it guesses are
-                knuckles. How cool is that!?
-              </Typography>
-              <br />
-              <Typography>
-                <strong>Instructions</strong>
-                <ul>
-                  <li>Allow access to your web cam</li>
-                  <li>Sit in a spot with good lighting</li>
-                  <li>Having a plain background works best</li>
-                  <li>Check out the gestures menu to see what is currently supported</li>
-                </ul>
-              </Typography>
-              Hope you enjoy and happy signing!
-              <br />
-              <br />- Trevor
-            </Typography>
-          </Box>
-        </Box>
+        <About />
+      </Drawer>
+      <Drawer
+        anchor="right"
+        open={gestureDrawerState}
+        onClose={() => setGestureDrawerState(false)}
+      >
+        <GestureList />
       </Drawer>
       <Button
         variant="contained"
         color="primary"
-        sx={{marginRight: "1rem"}}
-        onClick={() => setDrawerState(true)}
+        sx={{ marginRight: "1rem" }}
+        onClick={() => setAboutDrawerState(true)}
       >
         About
       </Button>
-      <Button variant="outlined" color="secondary" sx={{marginLeft: "1rem"}}>
-        Supported Gestures
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{ marginLeft: "1rem" }}
+        onClick={() => setGestureDrawerState(true)}
+      >
+        Gestures
       </Button>
     </Box>
   );
