@@ -148,4 +148,5 @@ const Camera = ({ setCurGesture, setGestureImage }) => {
   );
 };
 
+
 export default Camera;
